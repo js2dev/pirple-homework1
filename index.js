@@ -9,15 +9,15 @@ const url = require('url');
 
 // Instantiate the server
 var helloServer = http.createServer(function(req, res){
-    var parsedUrl = url.parse(req.url, true);
-    var paths = parsedUrl.pathname.replace(/^\/+|\/+$/g, '');
+    let parsedUrl = url.parse(req.url, true);
+    let paths = parsedUrl.pathname.replace(/^\/+|\/+$/g, '');
 
     req.on('data', function(data) {
         console.log(data);
     });
 
     req.on('end', () => {
-        var chosenHandler = typeof(router[paths]) !== 'undefined' ? router[paths] : handlers.notFound;
+        let chosenHandler = typeof(router[paths]) !== 'undefined' ? router[paths] : handlers.notFound;
 
         // Returning data
         let data = {
@@ -33,7 +33,7 @@ var helloServer = http.createServer(function(req, res){
                 payload = typeof(payload) == 'object' ? payload : {};
 
                 // Convert the payload to a string
-                var payloadString = JSON.stringify(payload);
+                let payloadString = JSON.stringify(payload);
 
                 // Return the  response
                 res.setHeader('Content-Type', 'application/json');
